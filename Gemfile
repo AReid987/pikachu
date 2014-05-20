@@ -14,8 +14,12 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'sprockets-rails', '=2.0.0.backport1'
-	gem 'sprockets', '=2.2.2.backport2'
-	gem 'sass-rails', github: 'guilleiguaran/sass-rails', branch: 'backport'
+  gem 'sprockets', '=2.2.2.backport2'
+  gem 'sass-rails', github: 'guilleiguaran/sass-rails', branch: 'backport'
+end
+
+group :development do
+	gem 'pry'
 end
 
 gem 'jquery-rails'
@@ -34,5 +38,5 @@ gem 'bcrypt'
 
 # To use debugger
 # gem 'debugger'
-
+gem "cancan"
 
