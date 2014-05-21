@@ -18,6 +18,7 @@ group :assets do
   gem 'sass-rails', github: 'guilleiguaran/sass-rails', branch: 'backport'
 end
 
+gem 'bootstrap-sass'
 group :development do
 	gem 'pry'
 end
