@@ -1,15 +1,24 @@
-<h2>Users</h2>
-
-<% @users.each do |user|%>
-	<%= user.nickname %>
-	<%= user.firstname %>
-	<%= user.lastname %>
-<% end %>
-
-<h2>Admins</h2>
-
-<% @admins.each do |admin|%>
-	<%= admin.nickname %>
-	<%= admin.firstname %>
-	<%= admin.lastname %>
-<% end %>
+<h2>Users and Admins</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Login</th>
+			<th>Firstname</th>
+			<th>Lastname</th>
+		</tr>
+	</thead>
+	<% @users.each do |user|%>
+		<tr>
+		<td><%= user.nickname %></td>
+		<td><%= user.firstname %></td>
+		<td><%= user.lastname %></td>
+		</tr>
+	<% end %>
+	<% @admins.each do |admin|%>
+		<tr>
+		<td><%= admin.nickname %></td>
+		<td><%= admin.firstname %></td>
+		<td><%= admin.lastname %></td>
+		</tr>
+	<% end %>
+</table>
