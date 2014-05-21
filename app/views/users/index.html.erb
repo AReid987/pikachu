@@ -1,7 +1,17 @@
 <h2>Users</h2>
-
-<% @users.each do |user|%>
-	<%= user.nickname %>
-	<%= user.firstname %>
-	<%= user.lastname %>
-<% end %>
+<table>
+	<thead>
+		<tr>
+			<th>Login</th>
+			<th>Firstname</th>
+			<th>Lastname</th>
+		</tr>
+	</thead>
+	<% @users.each do |user|%>
+		<tr>
+		<td><%= user.nickname %></td>
+		<td><%= user.firstname %></td>
+		<td><%= user.lastname %></td>
+		</tr>
+	<% end %>
+</table>
