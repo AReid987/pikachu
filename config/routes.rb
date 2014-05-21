@@ -1,6 +1,6 @@
 Pikachu::Application.routes.draw do
   resources :admins
-  resource :users
+  resources :users
 
   get "exit" => "sessions#destroy", :as => "exit"
   get "signin" => "sessions#new", :as => "signin"
