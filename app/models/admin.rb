@@ -1,4 +1,5 @@
 class Admin < ActiveRecord::Base
+  ROLES = %w[simple super]
   attr_accessible :nickname, :firstname, :lastname, :email, :password, :password_confirmation
   attr_accessor :password
     before_save :encrypt_pass
