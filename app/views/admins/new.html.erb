@@ -1,6 +1,6 @@
 <h2>Register</h2>
 
-<% form_for @admin do |f| %>
+<%= form_for @admin do |f| %>
   <% if @admin.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
@@ -35,5 +35,5 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </p>
-  <p class="button"><%= f.submit %></p>
+  <p class="button"><%= f.submit "Create admin" %></p>
 <% end %>
