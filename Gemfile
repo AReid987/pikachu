@@ -39,5 +39,6 @@ gem 'bcrypt'
 
 # To use debugger
 # gem 'debugger'
-gem "cancan"
-
+gem 'cancan'
+gem 'faker'
+gem 'kaminari'
