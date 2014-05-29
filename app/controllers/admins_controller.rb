@@ -3,7 +3,6 @@ class AdminsController < ApplicationController
   before_filter :correct_user,   only: [:edit, :update]
 
  	def index
-		@users = User.all
 		@admins = Admin.all
 	end
 
@@ -14,7 +13,7 @@ class AdminsController < ApplicationController
 	def create
 	  @admin = Admin.new(params[:admin])
 	  if @admin.save
-	    redirect_to admins_path, :notice => "#{admin.nickname} was succesfully created!"
+	    redirect_to admins_path, :notice => "Your account was succesfully created!"
 	  else
 	    render "new"
 	  end
