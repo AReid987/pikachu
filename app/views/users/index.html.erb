@@ -1,10 +1,19 @@
 <h2>Users</h2>
+
+<%= form_tag users_path, :method => 'get', :id => "users_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+
 <table>
 	<thead>
 		<tr>
-			<th>Login</th>
-			<th>Firstname</th>
-			<th>Lastname</th>
+			<th><%= sortable 'nickname' %></th>
+			<th><%= sortable 'firstname' %></th>
+			<th><%= sortable 'lastname' %></th>
 		</tr>
 	</thead>
 	<% @users.each do |user|%>

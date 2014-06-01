@@ -25,4 +25,15 @@ class User < ActiveRecord::Base
         self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
       end
     end
+
+
+
+    def self.search(search)
+      if search
+        where('nickname LIKE ?', "%#{search}%")
+      else
+        scoped
+      end
+    end
+
 end
