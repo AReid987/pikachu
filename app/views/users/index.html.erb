@@ -1,27 +1,9 @@
 <h2>Users</h2>
 
-<%= form_tag users_path, :method => 'get', :id => "users_search" do %>
+<%= form_tag users_path, :method => 'get', :id => 'users_search' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
+    <%= submit_tag 'Search', :name => nil %>
   </p>
+  <div id='users'><%= render 'users' %></div>
 <% end %>
-
-
-<table>
-	<thead>
-		<tr>
-			<th><%= sortable 'nickname' %></th>
-			<th><%= sortable 'firstname' %></th>
-			<th><%= sortable 'lastname' %></th>
-		</tr>
-	</thead>
-	<% @users.each do |user|%>
-		<tr>
-		<td><%= user.nickname %></td>
-		<td><%= user.firstname %></td>
-		<td><%= user.lastname %></td>
-		</tr>
-	<% end %>
-</table>
-<%= paginate @users %>
