@@ -43,3 +43,4 @@ gem 'bcrypt'
 gem 'cancan'
 gem 'faker'
 gem 'kaminari'
+gem 'rails_12factor', group: :production
