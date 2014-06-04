@@ -29,10 +29,12 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
+
   def initialize(admin)
-    if admin.super?
-      can :manage, :all
-    else
-      can [:read, :update], [Admin, User]
+        if admin.super?
+          can :manage, :all
+        else
+          can [:read, :update], [Admin, User]
+        end
   end
 end
