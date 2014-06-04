@@ -31,7 +31,7 @@ class Ability
   end
 
   def initialize(admin)
-        if admin.super?
+        if admin.role? :super
           can :manage, :all
         else
           can [:read, :update], [Admin, User]
