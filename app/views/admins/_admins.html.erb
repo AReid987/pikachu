@@ -1,0 +1,19 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+	<thead>
+		<tr>
+			<th><%= sortable 'nickname' %></th>
+			<th><%= sortable 'firstname' %></th>
+			<th><%= sortable 'lastname' %></th>
+		</tr>
+	</thead>
+	<% @admins.each do |admin|%>
+		<tr>
+		<td><%= admin.nickname %></td>
+		<td><%= admin.firstname %></td>
+		<td><%= admin.lastname %></td>
+		</tr>
+	<% end %>
+</table>
+<%= paginate @admins %>
