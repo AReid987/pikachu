@@ -1,9 +1,10 @@
 class AdminsController < ApplicationController
 	before_filter :signed_in_user, only: [:edit, :update]
   before_filter :correct_user,   only: [:edit, :update]
+  helper_method :sort_column, :sort_direction
 
  	def index
-		@admins = Admin.all
+		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
 	end
 
 	def new
@@ -55,4 +56,12 @@ class AdminsController < ApplicationController
   	def current_user?(user)
     	user == current_user
   	end
+
+  	def sort_column
+	    Admin.column_names.include?(params[:sort]) ? params[:sort] : 'nickname'
+	  end
+	  
+	  def sort_direction
+	    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+	  end
 end

@@ -1,6 +1,6 @@
 class Admin < ActiveRecord::Base
   ROLES = %w[simple super]
-  attr_accessible :nickname, :firstname, :lastname, :email, :password, :password_confirmation
+  attr_accessible :nickname, :firstname, :lastname, :email, :password, :password_confirmation, :role
   attr_accessor :password
     before_save :encrypt_pass
     before_save { |admin| admin.email = email.downcase }
@@ -23,6 +23,14 @@ class Admin < ActiveRecord::Base
       if password.present?
         self.password_salt = BCrypt::Engine.generate_salt
         self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      end
+    end
+
+    def self.search(search)
+      if search
+        where('nickname LIKE ?', "%#{search}%")
+      else
+        scoped
       end
     end
 end
