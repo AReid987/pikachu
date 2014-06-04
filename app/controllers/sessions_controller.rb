@@ -8,13 +8,9 @@ class SessionsController < ApplicationController
 	  if user
 	    session[:user_id] = user.id
 	    redirect_to user
-	  else
-	    flash.now.alert = "Invalid email or password"
-	    render "new"
-	  end
-	  if admin
+	  elsif admin
 	    session[:admin_id] = admin.id
-	    redirect_to admin
+	    redirect_to admins_path
 	  else
 	    flash.now.alert = "Invalid email or password"
 	    render "new"
