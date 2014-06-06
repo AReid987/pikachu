@@ -8,12 +8,16 @@
 			<th><%= sortable 'lastname' %></th>
 		</tr>
 	</thead>
-	<% @users.each do |user|%>
-		<tr>
-		<td><%= user.nickname %></td>
-		<td><%= user.firstname %></td>
-		<td><%= user.lastname %></td>
-		</tr>
-	<% end %>
+	<tbody>
+		<% @users.each do |user|%>
+			<%= content_tag_for :tr, user do %>
+				<tr>
+				<td><%= user.nickname %></td>
+				<td><%= user.firstname %></td>
+				<td><%= user.lastname %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
 </table>
 <%= paginate @users %>

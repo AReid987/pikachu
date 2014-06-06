@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require_tree .
 $(function() {
@@ -18,6 +19,7 @@ $(function() {
     $.getScript(this.href);
     return false;
   });
+  $("#users tbody").sortable({axis: 'y'});
   $("#users_search input").keyup(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
