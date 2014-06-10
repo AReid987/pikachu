@@ -1,0 +1,18 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Pikachu", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+           <% if current_user %>
+              Logged in as <%= current_user.nickname %>.
+              <li><%= link_to "Exit", signout_path %></li>li>
+            <% else %>
+              <li><%= link_to "Register", register_path %></li>
+              <li><%= link_to "Sign in", signin_path %></li>
+            <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
