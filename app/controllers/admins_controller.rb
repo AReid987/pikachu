@@ -46,15 +46,15 @@ class AdminsController < ApplicationController
 
     def correct_user
       @admin = Admin.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_path) unless current_user?(@admin)
     end
 
     def signed_in?
     	!current_user.nil?
   	end
 
-  	def current_user?(user)
-    	user == current_user
+  	def current_user?(admin)
+    	admin == current_user
   	end
 
   	def sort_column
