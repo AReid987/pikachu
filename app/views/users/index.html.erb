@@ -1,9 +1,7 @@
-<h2>Users</h2>
+<h2 class="h2">Users</h2>
 
-<%= form_tag users_path, :method => 'get', :id => 'users_search' do %>
-  <p>
+	<%= form_tag users_path, :method => 'get', :class=>"form-group", :id=>"users_search" do %>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag 'Search', :name => nil %>
-  </p>
-  <div id='users'><%= render 'users' %></div>
+ 		<button type="submit" class="btn btn-primary">Search</button>
+  <div id='users' data-update-url='<%= sort_users_url %>'><%= render 'users' %></div>
 <% end %>
