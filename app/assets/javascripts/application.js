@@ -19,9 +19,15 @@ $(function() {
     $.getScript(this.href);
     return false;
   });
-  $("#users tbody").sortable({axis: 'y'});
-  $("#users_search input").keyup(function() {
+  $('#users tbody').sortable({axis: 'y', update: function(){
+		$.post($(this).data('update-url'), $(this).sortable('serialize'));
+		}
+	});
+	$("#users_search input").keyup(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
+  });
+  $('.destroy_user').bind('ajax:success', function() {
+    $(this).closest('tr').fadeOut();
   });
 });
