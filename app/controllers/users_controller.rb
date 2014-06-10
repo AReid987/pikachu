@@ -3,8 +3,11 @@ class UsersController < ApplicationController
   before_filter :correct_user,   only: [:edit, :update]
   helper_method :sort_column, :sort_direction
 
+	#load_and_authorize_resource
+	
  	def index
 		@users = User.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
+		#authorize! :read, @users
 	end
 
 	def new
@@ -27,22 +30,36 @@ class UsersController < ApplicationController
 	
 	def edit
 		@user = User.find(params[:id])
+		#authorize! :edit, @user
 	end
 
 	def update
 		@user = User.find(params[:id])
+    respond_to do |format|
     if @user.update_attributes(params[:user])
-      flash[:success] = "User was updated"
-      redirect_to root_path
+      format.html {flash[:success] = "User was updated"}
+      format.js
     else
-      render "edit"
+      format.html {render "edit"}
+      format.js
     end
+  	end
 	end
 
 	def destroy
 		User.find(params[:id]).destroy
-		flash[:success] = 'User destroyed!'
-		redirect_to root_path
+		respond_to do |format|
+    	format.html { redirect_to(users_url, :notice => 'User destroyed!') }
+    	format.js   { render :nothing => true }
+		#authorize! :destroy, @user
+		end
+	end
+
+	def sort
+		params[:user].each_with_index do |id, index|
+    	User.update_all({position: index+1}, {id: id})
+  	end
+  	render nothing: true
 	end
 
 	private
