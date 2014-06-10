@@ -1,20 +1,24 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
-<table>
+<table class="table table-condensed">
 	<thead>
 		<tr>
-			<th><%= sortable 'nickname' %></th>
-			<th><%= sortable 'firstname' %></th>
-			<th><%= sortable 'lastname' %></th>
+			<th><%= sortable "nickname" %></th>
+			<th><%= sortable "firstname" %></th>
+			<th><%= sortable "lastname" %></th>
+			<th><%= sortable "email" %></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @users.each do |user|%>
 			<%= content_tag_for :tr, user do %>
 				<tr>
-				<td><%= user.nickname %></td>
+				<td><%= link_to user.nickname, edit_user_path(user) %></td>
 				<td><%= user.firstname %></td>
 				<td><%= user.lastname %></td>
+				<td><%= user.email %></td>
+				<td><%= link_to "Destroy", user, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'destroy_user' %></td>
 				</tr>
 			<% end %>
 		<% end %>
