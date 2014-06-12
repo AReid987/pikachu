@@ -1,7 +1,10 @@
 class Admin < ActiveRecord::Base
   ROLES = %w[simple super]
+  
   attr_accessible :nickname, :firstname, :lastname, :email, :password, :password_confirmation, :role
+  
   attr_accessor :password
+  
     before_save :encrypt_pass
     before_save { |admin| admin.email = email.downcase }
 

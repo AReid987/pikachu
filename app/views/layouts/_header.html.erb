@@ -1,12 +1,12 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
+<header class="navbar navbar-default navbar-fixed-top navbar-inverse", role="navigation">
     <div class="container">
       <%= link_to "Pikachu", root_path, id: "logo" %>
       <nav>
-        <ul class="nav pull-right">
-           <% if current_user %>
-              Logged in as <%= current_user.nickname %>.
-              <li><%= link_to "Exit", signout_path %></li>li>
+        <ul class="nav nav-pills navbar-right">
+           <% if current_user  %>
+              <li><%= link_to "Exit", signout_path %></li>
+            <% elsif current_admin %>
+              <li><%= link_to "Exit", signout_path %></li>
             <% else %>
               <li><%= link_to "Register", register_path %></li>
               <li><%= link_to "Sign in", signin_path %></li>
@@ -14,5 +14,4 @@
         </ul>
       </nav>
     </div>
-  </div>
 </header>

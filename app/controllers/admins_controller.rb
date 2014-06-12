@@ -1,8 +1,7 @@
 class AdminsController < ApplicationController
-	before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user,   only: [:edit, :update]
-  helper_method :sort_column, :sort_direction
-
+	helper_method :sort_column, :sort_direction
+	load_and_authorize_resource
+	
  	def index
 		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
 	end
@@ -40,24 +39,7 @@ class AdminsController < ApplicationController
 
 	private
 
-    def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
-
-    def correct_user
-      @admin = Admin.find(params[:id])
-      redirect_to(root_path) unless current_user?(@admin)
-    end
-
-    def signed_in?
-    	!current_user.nil?
-  	end
-
-  	def current_user?(admin)
-    	admin == current_user
-  	end
-
-  	def sort_column
+   	def sort_column
 	    Admin.column_names.include?(params[:sort]) ? params[:sort] : 'nickname'
 	  end
 	  
