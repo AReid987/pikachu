@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
 	helper_method :sort_column, :sort_direction
-	load_and_authorize_resource
+	#load_and_authorize_resource
 	
  	def index
 		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
