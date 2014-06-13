@@ -18,7 +18,7 @@
 				<td><%= user.firstname %></td>
 				<td><%= user.lastname %></td>
 				<td><%= user.email %></td>
-				<% if can? :delete, User %>
+				<% if can? :destroy, user %>
 				<td>
 				<%= link_to "Destroy", user, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'destroy_user' %>
 				</td>
