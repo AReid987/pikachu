@@ -9,7 +9,15 @@ class ApplicationController < ActionController::Base
 	end
 
 	def current_admin
-		@current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]
+		@current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]		
 	end
 
+	def current_ability
+		@current_ability ||= case 
+												when current_user
+													Ability.new(current_user)
+												when current_admin
+													AdminAbility.new(current_admin)
+		end
+	end
 end
