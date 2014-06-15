@@ -3,8 +3,12 @@
       <%= link_to "Pikachu", root_path, id: "logo" %>
       <nav>
         <ul class="nav nav-pills navbar-right">
-           <% if (current_user || current_admin) %>
+           <% if current_admin %>
+              <li class="navbar-text"><%= "Welcome, #{current_admin.nickname}"%></li>
               <li><%= link_to "Exit", signout_path %></li>
+           <% elsif current_user %>
+              <li class="navbar-text"><%= "Welcome, #{current_user.nickname}"%></li>
+              <li><%= link_to "Exit", signout_path %></li>  
            <% else %>
               <li><%= link_to "Register", register_path %></li>
               <li><%= link_to "Sign in", signin_path %></li>
