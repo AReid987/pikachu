@@ -1,8 +1,9 @@
 class AdminsController < ApplicationController
 	helper_method :sort_column, :sort_direction
-	#load_and_authorize_resource
+	load_and_authorize_resource
 	
  	def index
+ 		@admin = Admin.new
 		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
 	end
 
@@ -13,7 +14,7 @@ class AdminsController < ApplicationController
 	def create
 	  @admin = Admin.new(params[:admin])
 	  if @admin.save
-	    redirect_to admins_path, :notice => "Your account was succesfully created!"
+	    redirect_to admins_path, :notice => "Admin was succesfully created!"
 	  else
 	    render "new"
 	  end
@@ -35,6 +36,11 @@ class AdminsController < ApplicationController
     else
       render "edit"
     end
+	end
+
+	def destroy
+		Admin.find(params[:id]).destroy
+    redirect_to(users_url, :notice => 'Admin destroyed!')
 	end
 
 	private
