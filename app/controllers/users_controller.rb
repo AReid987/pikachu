@@ -1,13 +1,10 @@
 class UsersController < ApplicationController
-	before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user,   only: [:edit, :update]
   helper_method :sort_column, :sort_direction
+  load_and_authorize_resource except: :new
 
-	#load_and_authorize_resource
-	
  	def index
+		@user = User.new
 		@users = User.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
-		#authorize! :read, @users
 	end
 
 	def new
@@ -30,19 +27,18 @@ class UsersController < ApplicationController
 	
 	def edit
 		@user = User.find(params[:id])
-		#authorize! :edit, @user
 	end
 
 	def update
 		@user = User.find(params[:id])
     respond_to do |format|
-    if @user.update_attributes(params[:user])
-      format.html {flash[:success] = "User was updated"}
-      format.js
-    else
-      format.html {render "edit"}
-      format.js
-    end
+	    if @user.update_attributes(params[:user])
+	      format.html { redirect_to(@user, :notice => "User was updated")}
+	      format.js
+	    else
+	      format.html {render "edit"}
+	      format.js
+	    end
   	end
 	end
 
@@ -51,7 +47,6 @@ class UsersController < ApplicationController
 		respond_to do |format|
     	format.html { redirect_to(users_url, :notice => 'User destroyed!') }
     	format.js   { render :nothing => true }
-		#authorize! :destroy, @user
 		end
 	end
 
@@ -63,23 +58,6 @@ class UsersController < ApplicationController
 	end
 
 	private
-
-    def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-    end
-
-    def signed_in?
-    	!current_user.nil?
-  	end
-
-  	def current_user?(user)
-    	user == current_user
-  	end
 
 	  def sort_column
 	    User.column_names.include?(params[:sort]) ? params[:sort] : 'nickname'
