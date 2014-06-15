@@ -35,5 +35,8 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </p>
-  <p class="button"><%= f.submit "Save changes" %></p>
+  <% if can? :manage, Admin%>
+  <%= f.collection_select :role, Admin::ROLES, :to_s, :humanize %>
+  <% end %>
+  <p><%= f.submit "Save changes", :class=>"btn, btn-primary" %></p>
 <% end %>
