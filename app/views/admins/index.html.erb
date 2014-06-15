@@ -1,9 +1,9 @@
 <h2>Admins</h2>
 
-<%= form_tag admins_path, :method => 'get', :id => 'users_search' do %>
+<%= form_tag admins_path, :method => 'get', :id => 'users_search', :class=>"form-group" do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag 'Search', :name => nil %>
+    <%= submit_tag 'Search', :class=>"btn btn-primary" %>
   </p>
-  <div id='users'><%= render 'admins' %></div>
+ <div id='admins' data-update-url='<%= sort_admins_path %>'><%= render 'admins' %></div>
 <% end %>
