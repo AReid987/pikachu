@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
+//= require bootstrap
 //= require_tree .
 $(function() {
   $(document).on("click", "#users th a, #users .pagination a", function() {
@@ -27,7 +28,7 @@ $(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
   });
-  $('.destroy_user').bind('ajax:success', function() {
+  $('#destroy_user').bind('ajax:success', function() {
     $(this).closest('tr').fadeOut();
   });
 });
