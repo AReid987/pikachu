@@ -1,4 +1,5 @@
 Pikachu::Application.routes.draw do
+  
   resources :admins
   
   resources :users do
@@ -12,6 +13,6 @@ Pikachu::Application.routes.draw do
 	get "signin" => "sessions#new", :as => "signin"
 	get "register" => "users#new", :as => "register"
   
-  root :to => "users#index"
+  root :to => "users#new"
 
 end
