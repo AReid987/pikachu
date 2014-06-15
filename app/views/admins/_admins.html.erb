@@ -17,10 +17,19 @@
 			<td><%= admin.firstname %></td>
 			<td><%= admin.lastname %></td>
 			<td><%= admin.email %></td>
+			<% if can? :edit, admin %>
+				<td>
+				<%= link_to "Edit", edit_admin_path(admin), :class=>"btn, btn-primary" %>
+				</td>
+				<% end %>
+			<% if can? :destroy, admin %>
+				<td>
+				<%= link_to "Destroy", admin, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn, btn-danger", :id =>"destroy_user" %>
+				</td>
+				<% end %>
 			</tr>
 		<% end %>
 	<% end %>
 	<tbody>
 </table>
 <%= paginate @admins %>
-<%= link_to "List of Users", users_path %>
