@@ -6,6 +6,6 @@ class AdminAbility
       can :manage, :all 
     else
       can [:read, :update], [Admin, User]
+    end  
   end
-end
 end
