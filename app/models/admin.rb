@@ -1,7 +1,7 @@
 class Admin < ActiveRecord::Base
   ROLES = %w[simple super]
   
-  attr_accessible :nickname, :firstname, :lastname, :email, :password, :password_confirmation, :role
+  attr_accessible :nickname, :firstname, :lastname, :email, :password, :password_confirmation, :role, :position
   
   attr_accessor :password
   
