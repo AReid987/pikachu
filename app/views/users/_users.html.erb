@@ -20,12 +20,12 @@
 				<td><%= user.email %></td>
 				<% if can? :edit, user %>
 				<td>
-				<%= link_to "Edit", edit_user_path(user), remote: true, :class=>"btn, btn-primary" %>
+				<%= link_to "Edit", edit_user_path(user), remote: true, :class=>"btn btn-xs btn-primary" %>
 				</td>
 				<% end %>
 				<% if can? :destroy, user %>
 				<td>
-				<%= link_to "Destroy", user, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn, btn-danger", :id =>"destroy_user" %>
+				<%= link_to "Destroy", user, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-xs btn-danger", :id =>"destroy_user" %>
 				</td>
 				<% end %>	
 				</tr>
@@ -34,4 +34,4 @@
 	</tbody>
 </table>
 <%= paginate @users %><br>
-<%= link_to "List of Admins", admins_path %>
+<%= link_to "List of Admins", admins_path, :class=>"btn btn-sm btn-info" %>
