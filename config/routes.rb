@@ -1,6 +1,10 @@
 Pikachu::Application.routes.draw do
   
-  resources :admins
+  resources :admins do
+    collection do
+      post :sort
+    end
+  end
   
   resources :users do
   	collection do
