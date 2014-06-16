@@ -7,6 +7,7 @@
 			<th><%= sortable 'firstname' %></th>
 			<th><%= sortable 'lastname' %></th>
 			<th><%= sortable "email" %></th>
+			<th><%= sortable "role" %></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,14 +18,15 @@
 			<td><%= admin.firstname %></td>
 			<td><%= admin.lastname %></td>
 			<td><%= admin.email %></td>
+			<td><%= admin.role %></td>
 			<% if can? :edit, admin %>
 				<td>
-				<%= link_to "Edit", edit_admin_path(admin), :class=>"btn, btn-primary" %>
+				<%= link_to "Edit", edit_admin_path(admin), remote: true, :class=>"btn btn-xs btn-primary" %>
 				</td>
 				<% end %>
 			<% if can? :destroy, admin %>
 				<td>
-				<%= link_to "Destroy", admin, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn, btn-danger", :id =>"destroy_user" %>
+				<%= link_to "Destroy", admin, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class=>"btn btn-xs btn-danger", :id =>"destroy_admin" %>
 				</td>
 				<% end %>
 			</tr>
