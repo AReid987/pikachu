@@ -20,15 +20,40 @@ $(function() {
     $.getScript(this.href);
     return false;
   });
-  $('#users tbody').sortable({axis: 'y', update: function(){
-		$.post($(this).data('update-url'), $(this).sortable('serialize'));
-		}
-	});
+  $('#users tbody').sortable({axis: 'y',update: function(){
+      $.ajax({
+        url: '/users/sort',
+        type: 'post',
+        data: $('#users tbody').sortable('serialize'),
+        dataType: 'script',
+        complete: function(request){
+          $('#users tbody').effect('highlight');
+        }
+      });
+    }
+  });
 	$("#users_search input").keyup(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
   });
-  $('#destroy_user').bind('ajax:success', function() {
-    $(this).closest('tr').fadeOut();
+  $(document).on("click", "#admins th a, #admins .pagination a", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $('#admins tbody').sortable({axis: 'y',update: function(){
+      $.ajax({
+        url: '/admins/sort',
+        type: 'post',
+        data: $('#admins tbody').sortable('serialize'),
+        dataType: 'script',
+        complete: function(request){
+          $('#admins tbody').effect('highlight');
+        }
+      });
+    }
+  });
+  $("#admins_search input").keyup(function() {
+    $.get($("#admins_search").attr("action"), $("#admins_search").serialize(), null, "script");
+    return false;
   });
 });
