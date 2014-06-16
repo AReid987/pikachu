@@ -1,9 +1,9 @@
 class AdminsController < ApplicationController
+	before_filter :set_admin, only: [:show, :edit, :update, :destroy]
 	helper_method :sort_column, :sort_direction
 	load_and_authorize_resource
 	
  	def index
- 		@admin = Admin.new
 		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
 	end
 
@@ -21,29 +21,43 @@ class AdminsController < ApplicationController
 	end
 
 	def show
-		
 	end
 
 	def edit
-		@admin = Admin.find(params[:id])
 	end
 
 	def update
-		@admin = Admin.find(params[:id])
-    if @admin.update_attributes(params[:admin])
-      flash[:success] = "Admin was updated"
-      redirect_to root_path
-    else
-      render "edit"
-    end
+     respond_to do |format|
+	    if @admin.update_attributes(params[:admin])
+	      format.html { redirect_to(@admin, :notice => "Admin was updated")}
+	      format.js
+	    else
+	      format.html {render "edit"}
+	      format.js
+	    end
+  	end
 	end
 
 	def destroy
-		Admin.find(params[:id]).destroy
-    redirect_to(users_url, :notice => 'Admin destroyed!')
+		@admin.destroy
+    respond_to do |format|
+    	format.html { redirect_to(users_url, :notice => 'Admin destroyed!') }
+    	format.js   { render :nothing => true }
+		end
+	end
+
+	def sort
+			params[:admin].each_with_index do |id, index|
+	    	Admin.update_all({position: index+1}, {id: id})
+	  	end
+	  	render nothing: true
 	end
 
 	private
+
+		def set_admin
+			@admin = Admin.find(params[:id])
+		end
 
    	def sort_column
 	    Admin.column_names.include?(params[:sort]) ? params[:sort] : 'nickname'
