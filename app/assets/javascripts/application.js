@@ -36,6 +36,9 @@ $(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
   });
+  $(document).on('ajax:success', '#delete_user', function(e) {
+    $(e.currentTarget).closest('tr').fadeOut();
+  });
   $(document).on("click", "#admins th a, #admins .pagination a", function() {
     $.getScript(this.href);
     return false;
