@@ -1,9 +1,13 @@
 <h2>Admins</h2>
 
-<%= form_tag admins_path, :method => 'get', :id => 'users_search', :class=>"form-group" do %>
+<%= form_tag admins_path, :method => 'get', :id => 'admins_search', :class=>"form-group" do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag 'Search', :class=>"btn btn-primary" %>
+    <%= submit_tag 'Search', :class=>"btn btn-sm btn-primary" %>
   </p>
  <div id='admins' data-update-url='<%= sort_admins_path %>'><%= render 'admins' %></div>
 <% end %>
+<%= link_to "Create Admin", new_admin_path, :class=>"btn btn-sm btn-info" %>
+<%= link_to "List of Users", users_path, :class=>"btn btn-sm btn-info" %>
+
+<div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
