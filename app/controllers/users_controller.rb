@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
+  before_filter :set_user, except: [:index, :new, :create, :sort]
   helper_method :sort_column, :sort_direction
   load_and_authorize_resource except: :new
 
  	def index
-		@user = User.new
 		@users = User.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
 	end
 
@@ -22,15 +22,12 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
 	end
 	
 	def edit
-		@user = User.find(params[:id])
 	end
 
 	def update
-		@user = User.find(params[:id])
     respond_to do |format|
 	    if @user.update_attributes(params[:user])
 	      format.html { redirect_to(@user, :notice => "User was updated")}
@@ -43,10 +40,11 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		User.find(params[:id]).destroy
+		@user.destroy
 		respond_to do |format|
     	format.html { redirect_to(users_url, :notice => 'User destroyed!') }
-    	format.js   { render :nothing => true }
+    	format.json { head :no_content }
+    	format.js   { render :layout => false }
 		end
 	end
 
@@ -58,6 +56,10 @@ class UsersController < ApplicationController
 	end
 
 	private
+
+		def set_user
+			@user = User.find(params[:id])
+		end
 
 	  def sort_column
 	    User.column_names.include?(params[:sort]) ? params[:sort] : 'nickname'
