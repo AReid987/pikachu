@@ -11,7 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.ui.all
+//= require jquery.ui.sortable
+//= require jquery.ui.effect-highlight
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
@@ -35,9 +36,6 @@ $(function() {
 	$("#users_search input").keyup(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
-  });
-  $(document).on('ajax:success', '#delete_user', function(e) {
-    $(e.currentTarget).closest('tr').fadeOut();
   });
   $(document).on("click", "#admins th a, #admins .pagination a", function() {
     $.getScript(this.href);
