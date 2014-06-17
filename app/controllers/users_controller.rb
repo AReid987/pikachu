@@ -42,13 +42,13 @@ class UsersController < ApplicationController
 		@user.destroy
 		respond_to do |format|
     	format.html { redirect_to(users_url, :notice => 'User destroyed!') }
-    	format.json { head :no_content }
-    	format.js   { render :layout => false }
+    	format.json
+    	format.js
 		end
 	end
 
 	def sort
-		params[:user].each_with_index do |id, index|
+		params[:user].each.with_index do |id, index|
     	User.update_all({position: index+1}, {id: id})
   	end
   	render nothing: true
