@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
-	before_filter :set_admin, only: [:show, :edit, :update, :destroy]
+	before_filter :load_admin, only: [:show, :edit, :update, :destroy]
 	helper_method :sort_column, :sort_direction
-	load_and_authorize_resource
+	load_and_authorize_resource except: [:new, :create]
 	
  	def index
 		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
@@ -39,10 +39,11 @@ class AdminsController < ApplicationController
 	end
 
 	def destroy
+		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
 		@admin.destroy
     respond_to do |format|
     	format.html { redirect_to(users_url, :notice => 'Admin destroyed!') }
-    	format.js   { render :nothing => true }
+    	format.js
 		end
 	end
 
@@ -55,7 +56,7 @@ class AdminsController < ApplicationController
 
 	private
 
-		def set_admin
+		def load_admin
 			@admin = Admin.find(params[:id])
 		end
 

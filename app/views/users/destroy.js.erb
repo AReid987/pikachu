@@ -1,3 +1,1 @@
-$('#destroy_user').bind('ajax:success', function() {
-    $(this).closest('tr').fadeOut();
-  });
+$("#users").html("<%= escape_javascript (render("users")) %>");

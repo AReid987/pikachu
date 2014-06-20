@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		@users = User.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page] 
 		@user.destroy
 		respond_to do |format|
     	format.html { redirect_to(users_url, :notice => 'User destroyed!') }
