@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :set_user, except: [:index, :new, :create, :sort]
   helper_method :sort_column, :sort_direction
-  load_and_authorize_resource except: [:new, :create]
+  load_and_authorize_resource
 
  	def index
 		@users = User.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]

@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
 	before_filter :load_admin, only: [:show, :edit, :update, :destroy]
 	helper_method :sort_column, :sort_direction
-	load_and_authorize_resource except: [:new, :create]
+	load_and_authorize_resource
 	
  	def index
 		@admins = Admin.search(params[:search]).order(sort_column + " " + sort_direction).page params[:page]
