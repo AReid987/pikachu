@@ -22,6 +22,8 @@ class ApplicationController < ActionController::Base
 													Ability.new(current_user)
 												when current_admin
 													AdminAbility.new(current_admin)
+												else
+                          GuestAbility.new
 		end
 	end
 end
