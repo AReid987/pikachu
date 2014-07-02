@@ -7,7 +7,10 @@
   </p>
  <div id='admins' data-update-url='<%= sort_admins_path %>'><%= render 'admins' %></div>
 <% end %>
+<% if can? :create, Admin %>
 <%= link_to "Create Admin", new_admin_path, :class=>"btn btn-sm btn-info" %>
+<% end %>
+
 <%= link_to "List of Users", users_path, :class=>"btn btn-sm btn-info" %>
 
 <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
