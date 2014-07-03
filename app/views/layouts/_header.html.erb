@@ -3,6 +3,8 @@
       <%= link_to "Pikachu", root_path, id: "logo" %>
       <nav>
         <ul class="nav nav-pills navbar-right">
+           <li><%= link_to "Users", users_path %></li>
+           <li><%= link_to "Admins", admins_path %></li>
            <% if current_admin %>
               <li class="navbar-text"><%= "Welcome, #{current_admin.nickname}"%></li>
               <li><%= link_to "Exit", signout_path %></li>
