@@ -11,3 +11,18 @@
  *= require_self
  *= require_tree .
  */
+.table th .current {
+  padding-right: 18px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.table th .asc {
+  background-image: url(/images/arrow-up.png);
+  background-size: contain;
+}
+
+.table th .desc {
+  background-image: url(/images/arrow-down.png);
+  background-size: contain;
+}
