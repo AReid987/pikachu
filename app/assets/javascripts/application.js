@@ -21,7 +21,13 @@ $(function() {
     $.getScript(this.href);
     return false;
   });
-  $('#users tbody').sortable({axis: 'y',update: function(){
+  var fixHelper = function(e, ui) {
+  ui.children().each(function() {
+    $(this).width($(this).width());
+  });
+  return ui;
+};
+  $('#users tbody').sortable({axis: 'y', helper: fixHelper, update: function(){
       $.ajax({
         url: '/users/sort',
         type: 'post',
@@ -41,7 +47,7 @@ $(function() {
     $.getScript(this.href);
     return false;
   });
-  $('#admins tbody').sortable({axis: 'y',update: function(){
+  $('#admins tbody').sortable({axis: 'y', helper: fixHelper, update: function(){
       $.ajax({
         url: '/admins/sort',
         type: 'post',
